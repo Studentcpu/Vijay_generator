@@ -13,21 +13,13 @@
       --border:#e0e4eb;
     }
     *{box-sizing:border-box}
-    body{
-      font-family:'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
-      margin:0;
-      background:var(--bg);
-      color:#1e293b;
-    }
+    body{font-family:'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;margin:0;background:var(--bg);color:#1e293b;}
     .container{max-width:1000px;margin:40px auto;padding:24px}
     header{display:flex;align-items:center;gap:16px;margin-bottom:24px}
     .logo{width:70px;height:70px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#00b4d8);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:22px;box-shadow:0 3px 10px rgba(13,110,253,0.3)}
     h1{margin:0;font-size:24px}
     p.lead{color:var(--muted);margin:6px 0 18px}
-
-    .grid{display:grid;grid-template-columns:1fr 360px;gap:24px}
     .card{background:var(--card);border-radius:12px;padding:22px;box-shadow:0 4px 16px rgba(0,0,0,0.05);border:1px solid var(--border)}
-
     label{font-size:14px;color:var(--muted);display:block;margin-bottom:6px}
     input, select, textarea{width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--border);background:#fff;font-size:15px}
     textarea{min-height:80px;resize:vertical}
@@ -35,7 +27,7 @@
     button.primary{background:var(--accent);color:#fff;padding:10px 16px;border-radius:8px;border:none;font-weight:500;cursor:pointer;transition:background 0.3s}
     button.primary:hover{background:#0b5ed7}
     .small{font-size:13px;color:var(--muted)}
-    @media(max-width:880px){.grid{grid-template-columns:1fr;}.container{padding:16px}}
+    @media(max-width:880px){.container{padding:16px}}
   </style>
 </head>
 <body>
@@ -48,79 +40,76 @@
       </div>
     </header>
 
-    <main class="grid">
-      <section class="card">
-        <h2 style="margin-top:0">Book a Generator</h2>
-        <p class="small">Fill in the form to request rental or purchase.</p>
+    <main class="card">
+      <h2>Book a Generator</h2>
+      <p class="small">Fill in the form to request rental or purchase.</p>
+      <div id="msg" style="display:none;background:#ecfdf5;color:#065f46;padding:8px;border-radius:8px;margin-bottom:12px;font-size:14px"></div>
 
-        <div id="msg" style="display:none;background:#ecfdf5;color:#065f46;padding:8px;border-radius:8px;margin-bottom:12px;font-size:14px"></div>
-
-        <form id="bookingForm" autocomplete="off">
-          <div class="row">
-            <div style="flex:1">
-              <label for="model">Genset Model</label>
-              <select id="model" required>
-                <option value="">-- Select model --</option>
-                <option value="5 kW">5 kW</option>
-                <option value="7.5 kW">7.5 kW</option>
-                <option value="20 kW">20 kW</option>
-                <option value="30 kW">30 kW</option>
-                <option value="40 kW">40 kW</option>
-              </select>
-            </div>
-            <div style="width:150px">
-              <label for="date">Date</label>
-              <input id="date" type="date" required />
-            </div>
-            <div style="width:130px">
-              <label for="time">Time</label>
-              <input id="time" type="time" required />
-            </div>
+      <form id="bookingForm" autocomplete="off">
+        <div class="row">
+          <div style="flex:1">
+            <label for="model">Genset Model</label>
+            <select id="model" required>
+              <option value="">-- Select model --</option>
+              <option value="5 kW">5 kW</option>
+              <option value="7.5 kW">7.5 kW</option>
+              <option value="20 kW">20 kW</option>
+              <option value="30 kW">30 kW</option>
+              <option value="40 kW">40 kW</option>
+            </select>
           </div>
-
-          <div class="row">
-            <div style="flex:1">
-              <label for="name">Full Name</label>
-              <input id="name" type="text" placeholder="Your name" required />
-            </div>
-            <div style="width:200px">
-              <label for="phone">Phone</label>
-              <input id="phone" type="text" placeholder="9876543210" required />
-            </div>
+          <div style="width:150px">
+            <label for="date">Date</label>
+            <input id="date" type="date" required />
           </div>
-
-          <div class="row">
-            <div style="flex:1">
-              <label for="email">Email</label>
-              <input id="email" type="email" placeholder="you@example.com" />
-            </div>
-            <div style="flex:1">
-              <label for="location">Location</label>
-              <input id="location" type="text" placeholder="City or site address" required />
-            </div>
+          <div style="width:130px">
+            <label for="time">Time</label>
+            <input id="time" type="time" required />
           </div>
+        </div>
 
-          <div class="row">
-            <div style="width:120px">
-              <label for="qty">Quantity</label>
-              <select id="qty">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-              </select>
-            </div>
-            <div style="flex:1">
-              <label for="msgInput">Message (optional)</label>
-              <textarea id="msgInput" placeholder="Special requirements or notes..."></textarea>
-            </div>
+        <div class="row">
+          <div style="flex:1">
+            <label for="name">Full Name</label>
+            <input id="name" type="text" placeholder="Your name" required />
           </div>
+          <div style="width:200px">
+            <label for="phone">Phone</label>
+            <input id="phone" type="text" placeholder="9876543210" required />
+          </div>
+        </div>
 
-          <div style="margin-top:10px">
-            <button type="submit" class="primary">Request Booking</button>
+        <div class="row">
+          <div style="flex:1">
+            <label for="email">Email</label>
+            <input id="email" type="email" placeholder="you@example.com" />
           </div>
-        </form>
-      </section>
+          <div style="flex:1">
+            <label for="location">Location</label>
+            <input id="location" type="text" placeholder="City or site address" required />
+          </div>
+        </div>
+
+        <div class="row">
+          <div style="width:120px">
+            <label for="qty">Quantity</label>
+            <select id="qty">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+            </select>
+          </div>
+          <div style="flex:1">
+            <label for="msgInput">Message (optional)</label>
+            <textarea id="msgInput" placeholder="Special requirements or notes..."></textarea>
+          </div>
+        </div>
+
+        <div style="margin-top:10px">
+          <button type="submit" class="primary">Request Booking</button>
+        </div>
+      </form>
     </main>
 
     <footer style="text-align:center;margin-top:30px;color:var(--muted);font-size:13px">
@@ -140,7 +129,7 @@
       setTimeout(()=>{msgEl.style.display='none';},5000);
     }
 
-    form.addEventListener('submit', e => {
+    form.addEventListener('submit', async e => {
       e.preventDefault();
       const booking = {
         model: document.getElementById('model').value,
@@ -154,20 +143,21 @@
         message: document.getElementById('msgInput').value
       };
 
-      if(!booking.model || !booking.date || !booking.time || !booking.name || !booking.phone || !booking.location){
-        showMessage('Please fill all required fields.', true);
-        return;
+      try {
+        const res = await fetch('https://YOUR_RENDER_URL/book', {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify(booking)
+        });
+        const text = await res.text();
+        if(res.ok) showMessage(text);
+        else showMessage(text, true);
+        form.reset();
+      } catch(err){
+        showMessage('Failed to submit booking. Check server.', true);
+        console.error(err);
       }
-fetch('https://vijay-generator-server.onrender.com', { 
-  method: 'POST',
-  headers: {'Content-Type':'application/json'},
-  body: JSON.stringify(booking)
-      })
-      .then(res => res.text())
-      .then(data => showMessage(data))
-      .catch(err => showMessage('Error: ' + err, true));
     });
   </script>
 </body>
 </html>
-
