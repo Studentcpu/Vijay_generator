@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Vijay Generator</title>
+  <title>Vijay Generator — Book Your Genset</title>
   <style>
     :root{
       --accent:#0d6efd;
@@ -34,18 +34,7 @@
     .row{display:flex;gap:12px;margin-bottom:14px;flex-wrap:wrap}
     button.primary{background:var(--accent);color:#fff;padding:10px 16px;border-radius:8px;border:none;font-weight:500;cursor:pointer;transition:background 0.3s}
     button.primary:hover{background:#0b5ed7}
-    button.ghost{background:transparent;border:1px solid var(--border);padding:9px 14px;border-radius:8px;cursor:pointer}
-
-    .features{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
-    .feature{background:#e7f1ff;padding:8px 14px;border-radius:999px;font-size:13px;color:#0d47a1}
-
     .small{font-size:13px;color:var(--muted)}
-    table{width:100%;border-collapse:collapse;margin-top:12px}
-    th,td{padding:8px 6px;border-bottom:1px solid #edf0f4;text-align:left;font-size:14px}
-    th{color:#334155}
-
-    .success{background:#ecfdf5;color:#065f46;padding:8px;border-radius:8px;margin-bottom:12px;font-size:14px}
-
     @media(max-width:880px){.grid{grid-template-columns:1fr;}.container{padding:16px}}
   </style>
 </head>
@@ -54,17 +43,17 @@
     <header>
       <div class="logo">VG</div>
       <div>
-        <h1>Vijay Generator — Generator Booking</h1>
-        <p class="lead">Professional generator solutions for every need. Choose your genset model, date, time, and location to book.</p>
+        <h1>Vijay Generator — Book Your Genset</h1>
+        <p class="lead">Professional generator solutions. Choose your model, date, time, quantity, and location to book instantly.</p>
       </div>
     </header>
 
     <main class="grid">
       <section class="card">
         <h2 style="margin-top:0">Book a Generator</h2>
-        <p class="small">Fill in the form to request a demo, rental, or purchase inquiry.</p>
+        <p class="small">Fill in the form to request rental or purchase.</p>
 
-        <div id="msg" style="display:none" class="success"></div>
+        <div id="msg" style="display:none;background:#ecfdf5;color:#065f46;padding:8px;border-radius:8px;margin-bottom:12px;font-size:14px"></div>
 
         <form id="bookingForm" autocomplete="off">
           <div class="row">
@@ -127,41 +116,11 @@
             </div>
           </div>
 
-          <div style="display:flex;gap:10px;align-items:center;margin-top:10px">
+          <div style="margin-top:10px">
             <button type="submit" class="primary">Request Booking</button>
-            <button type="button" id="clearBtn" class="ghost">Clear Bookings</button>
           </div>
         </form>
-
-        <section style="margin-top:22px">
-          <h3 style="margin:0">Why Choose Vijay Generator?</h3>
-          <div class="features">
-            <div class="feature">High Efficiency</div>
-            <div class="feature">Low Noise Operation</div>
-            <div class="feature">24/7 Support</div>
-            <div class="feature">On-Site Service</div>
-            <div class="feature">Trusted Since 2010</div>
-          </div>
-        </section>
       </section>
-
-      <aside class="card">
-        <h3 style="margin-top:0">Bookings (Local View)</h3>
-        <p class="small">Stored locally in your browser. Export to CSV for record.</p>
-        <div style="display:flex;gap:8px;margin:8px 0">
-          <button id="downloadBtn" class="primary">Download CSV</button>
-          <button id="loadSample" class="ghost">Load Sample</button>
-        </div>
-
-        <div id="bookingsList" style="max-height:420px;overflow:auto">
-          <table id="bookingsTable">
-            <thead>
-              <tr><th>Model</th><th>Date</th><th>Time</th><th>Name</th><th>Location</th></tr>
-            </thead>
-            <tbody></tbody>
-          </table>
-        </div>
-      </aside>
     </main>
 
     <footer style="text-align:center;margin-top:30px;color:var(--muted);font-size:13px">
@@ -172,99 +131,45 @@
   <script>
     const form = document.getElementById('bookingForm');
     const msgEl = document.getElementById('msg');
-    const tableBody = document.querySelector('#bookingsTable tbody');
-    const bookingsKey = 'vijay_generator_bookings_v1';
 
-    function loadBookings(){
-      const raw = localStorage.getItem(bookingsKey);
-      return raw ? JSON.parse(raw) : [];
-    }
-    function saveBookings(arr){
-      localStorage.setItem(bookingsKey, JSON.stringify(arr));
-    }
-
-    function escapeHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
-
-    function renderBookings(){
-      const arr = loadBookings();
-      tableBody.innerHTML = '';
-      if(arr.length===0){
-        tableBody.innerHTML = '<tr><td colspan="5" class="small">No bookings yet</td></tr>';
-        return;
-      }
-      arr.slice().reverse().forEach(b=>{
-        const tr=document.createElement('tr');
-        tr.innerHTML=`<td>${escapeHtml(b.model)}</td><td>${escapeHtml(b.date)}</td><td>${escapeHtml(b.time)}</td><td>${escapeHtml(b.name)}</td><td>${escapeHtml(b.location)}</td>`;
-        tableBody.appendChild(tr);
-      });
-    }
-
-    function showMessage(text,isError=false){
+    function showMessage(text, isError=false){
       msgEl.style.display='block';
-      msgEl.textContent=text;
-      msgEl.style.background=isError?'#fee2e2':'#ecfdf5';
-      msgEl.style.color=isError?'#991b1b':'#065f46';
+      msgEl.textContent = text;
+      msgEl.style.background = isError ? '#fee2e2' : '#ecfdf5';
+      msgEl.style.color = isError ? '#991b1b' : '#065f46';
       setTimeout(()=>{msgEl.style.display='none';},5000);
     }
 
-    form.addEventListener('submit',e=>{
+    form.addEventListener('submit', e => {
       e.preventDefault();
-      const booking={
-        id:Date.now(),
-        model:document.getElementById('model').value.trim(),
-        date:document.getElementById('date').value,
-        time:document.getElementById('time').value,
-        name:document.getElementById('name').value.trim(),
-        phone:document.getElementById('phone').value.trim(),
-        email:document.getElementById('email').value.trim(),
-        location:document.getElementById('location').value.trim(),
-        qty:document.getElementById('qty').value,
-        message:document.getElementById('msgInput').value.trim()
+      const booking = {
+        model: document.getElementById('model').value,
+        date: document.getElementById('date').value,
+        time: document.getElementById('time').value,
+        name: document.getElementById('name').value,
+        phone: document.getElementById('phone').value,
+        email: document.getElementById('email').value,
+        location: document.getElementById('location').value,
+        qty: document.getElementById('qty').value,
+        message: document.getElementById('msgInput').value
       };
-      if(!booking.model||!booking.date||!booking.time||!booking.name||!booking.phone||!booking.location){
-        showMessage('Please fill all required fields.',true);
+
+      if(!booking.model || !booking.date || !booking.time || !booking.name || !booking.phone || !booking.location){
+        showMessage('Please fill all required fields.', true);
         return;
       }
-      const arr=loadBookings();
-      arr.push(booking);
-      saveBookings(arr);
-      renderBookings();
-      form.reset();
-      showMessage('Booking submitted successfully!');
-    });
 
-    document.getElementById('clearBtn').addEventListener('click',()=>{
-      if(confirm('Clear all local bookings?')){
-        localStorage.removeItem(bookingsKey);
-        renderBookings();
-        showMessage('All bookings cleared');
-      }
+      // Replace with your Render server URL
+      fetch('https://YOUR_RENDER_URL/book', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify(booking)
+      })
+      .then(res => res.text())
+      .then(data => showMessage(data))
+      .catch(err => showMessage('Error: ' + err, true));
     });
-
-    document.getElementById('downloadBtn').addEventListener('click',()=>{
-      const arr=loadBookings();
-      if(arr.length===0){showMessage('No bookings to download',true);return;}
-      const headers=['id','model','date','time','name','phone','email','location','qty','message'];
-      const rows=arr.map(r=>headers.map(h=>'"'+String(r[h]||'').replace(/"/g,'""')+'"').join(','));
-      const csv=headers.join(',')+'\n'+rows.join('\n');
-      const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});
-      const url=URL.createObjectURL(blob);
-      const a=document.createElement('a');
-      a.href=url;a.download='vijay_generator_bookings.csv';a.click();
-      URL.revokeObjectURL(url);
-    });
-
-    document.getElementById('loadSample').addEventListener('click',()=>{
-      const sample=[
-        {id:1,model:'5 kW',date:'2025-11-05',time:'09:30',name:'Amit Kumar',phone:'9876500000',email:'amit@example.com',location:'Kanpur',qty:1,message:'Need site visit'},
-        {id:2,model:'20 kW',date:'2025-11-08',time:'13:00',name:'Priya Sharma',phone:'9876599999',email:'priya@example.com',location:'Lucknow',qty:2,message:'Industrial use demo'}
-      ];
-      saveBookings(sample);
-      renderBookings();
-      showMessage('Sample bookings loaded');
-    });
-
-    renderBookings();
   </script>
 </body>
 </html>
+
