@@ -158,12 +158,10 @@
         showMessage('Please fill all required fields.', true);
         return;
       }
-
-      // Replace with your Render server URL
-      fetch('https://YOUR_RENDER_URL/book', {
-        method: 'POST',
-        headers: {'Content-Type':'application/json'},
-        body: JSON.stringify(booking)
+fetch('https://vijay-generator-server.onrender.com', { 
+  method: 'POST',
+  headers: {'Content-Type':'application/json'},
+  body: JSON.stringify(booking)
       })
       .then(res => res.text())
       .then(data => showMessage(data))
