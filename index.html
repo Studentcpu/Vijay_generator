@@ -4,121 +4,101 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Vijay Generator — Futuristic Booking</title>
-<meta name="theme-color" content="#070712"/>
+
 <style>
-  /* ---------- Colors / Theme ---------- */
   :root{
     --bg: #05060a;
     --panel: rgba(255,255,255,0.04);
     --glass: rgba(255,255,255,0.03);
     --muted: #9aa3b2;
-    --accent: #6ee7f3; /* cyan */
-    --accent-2: #7c5cff; /* purple */
-    --glow: 0 8px 30px rgba(124,92,255,0.12);
+    --accent: #6ee7f3;
+    --accent-2: #7c5cff;
     --glass-border: rgba(255,255,255,0.06);
-    --neon: linear-gradient(90deg,var(--accent),var(--accent-2));
   }
 
-  /* ---------- Reset ---------- */
   *{box-sizing:border-box;margin:0;padding:0}
-  html,body{height:100%}
   body{
-    font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    background:
-      radial-gradient(800px 400px at 10% 10%, rgba(124,92,255,0.06), transparent 10%),
-      radial-gradient(600px 300px at 90% 80%, rgba(110,231,243,0.04), transparent 12%),
-      var(--bg);
-    color:#e6eef7;
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-    padding:28px;
+    font-family: Inter, Arial;
+    background: radial-gradient(600px at 50% 10%, rgba(124,92,255,0.06), transparent),
+                radial-gradient(600px at 90% 80%, rgba(110,231,243,0.05), transparent),
+                var(--bg);
+    color:#e6eef7;margin:25px;padding-bottom:40px;
   }
 
-  /* ---------- Layout ---------- */
-  .wrap{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 380px;gap:28px;align-items:start}
-  @media (max-width:980px){ .wrap{grid-template-columns:1fr; padding:18px;} }
+  .wrap{max-width:1000px;margin:auto;display:grid;grid-template-columns:1fr 350px;gap:25px}
+  @media(max-width:900px){.wrap{grid-template-columns:1fr}}
 
-  header.site{
-    display:flex;align-items:center;gap:16px;margin-bottom:18px;
+  header.site{display:flex;align-items:center;gap:16px;margin-bottom:20px}
+  .logo{
+    width:70px;height:70px;border-radius:14px;
+    background:linear-gradient(135deg,#0ff,#7c5cff);
+    display:flex;justify-content:center;align-items:center;
+    font-weight:800;font-size:22px;color:#05060a;
+    box-shadow:0 0 25px rgba(124,92,255,0.3);
   }
-  .logo {
-    width:72px;height:72px;border-radius:14px;
-    background:linear-gradient(135deg,#0ff 20%, #7c5cff 100%);
-    display:flex;align-items:center;justify-content:center;font-weight:800;
-    color:#020617;font-size:22px;box-shadow:0 8px 30px rgba(124,92,255,0.14);
-    transform:translateZ(0);
-  }
-  .brand h1{font-size:20px;letter-spacing:0.2px;margin-bottom:6px}
-  .brand p{color:var(--muted);font-size:13px;margin:0}
+  .brand h1{font-size:22px;margin-bottom:5px}
+  .brand p{color:var(--muted);font-size:13px}
 
-  /* ---------- Glass Card ---------- */
   .card{
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.015));
+    background:rgba(255,255,255,0.03);
     border:1px solid var(--glass-border);
-    border-radius:14px;padding:20px;backdrop-filter: blur(8px);
-    box-shadow: var(--glow);
+    padding:20px;border-radius:14px;
+    backdrop-filter:blur(8px);
   }
 
-  /* ---------- Hero / Title ---------- */
-  .hero{
-    margin-bottom:14px;padding:18px;border-radius:12px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    border:1px solid rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:space-between;
+  .btn{
+    background:linear-gradient(90deg,#6ee7f3,#7c5cff);
+    padding:12px 18px;border-radius:10px;
+    border:none;color:#05060a;font-weight:700;
+    cursor:pointer;transition:0.2s;width:100%;
+    display:flex;align-items:center;justify-content:center;gap:8px;
   }
-  .hero-left h2{font-size:18px}
-  .hero-left p{color:var(--muted);font-size:13px;margin-top:6px}
-
-  /* ---------- Form ---------- */
-  form .label{font-size:13px;color:var(--muted);margin-bottom:6px}
-  .input, select, textarea{
-    display:block;width:100%;padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);
-    background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));
-    color: #dfefff;font-size:14px;outline:none;
-    transition: box-shadow .15s, transform .08s;
+  .btn:hover{transform:translateY(-3px);}
+  .btn:disabled{
+    opacity:0.7;
+    cursor:not-allowed;
+    transform:none;
   }
-  .input:focus, select:focus, textarea:focus{
-    box-shadow: 0 6px 18px rgba(110,231,243,0.06), 0 0 18px rgba(124,92,255,0.04);
-    border-color: rgba(110,231,243,0.22);
-    transform: translateY(-2px);
+
+  .btn-ghost{
+    background:transparent;border:1px solid rgba(255,255,255,0.08);
+    padding:12px 18px;border-radius:10px;color:var(--muted);
+    cursor:pointer;width:100%;
   }
-  .row{display:flex;gap:12px;margin-bottom:14px;flex-wrap:wrap}
-  .row .col{flex:1}
-  .small{font-size:13px;color:var(--muted)}
 
-  .btn {
-    display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:10px;border:0;
-    background:transparent;color:#05202b;font-weight:700;cursor:pointer;
-    background-image: var(--neon); background-size:200% 100%;
-    box-shadow: 0 8px 30px rgba(124,92,255,0.08);
-    transition: transform .12s, filter .12s;
+  /* 🔄 Loading spinner */
+  .spinner{
+    width:16px;
+    height:16px;
+    border-radius:50%;
+    border:2px solid rgba(255,255,255,0.4);
+    border-top-color:#05060a;
+    animation: spin 0.7s linear infinite;
   }
-  .btn:hover{transform:translateY(-3px);filter:brightness(1.05)}
-
-  .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);padding:10px 12px;border-radius:10px}
-
-  /* ---------- Neon border lines ---------- */
-  .accent-line{height:3px;border-radius:6px;background:var(--neon);margin:14px 0 18px}
-
-  /* ---------- Side panel ---------- */
-  .side-list li{margin-bottom:10px;color:var(--muted);font-size:14px}
-  .side-title{font-weight:700;margin-bottom:10px}
-
-  /* ---------- messages ---------- */
-  .msg{
-    padding:10px;border-radius:10px;margin-bottom:12px;font-weight:600;font-size:14px;display:none;
+  @keyframes spin{
+    to{ transform: rotate(360deg); }
   }
-  .msg.success{background:linear-gradient(90deg, rgba(110,231,243,0.06), rgba(124,92,255,0.03)); color: #bff7ff; border:1px solid rgba(110,231,243,0.06)}
-  .msg.error{background:rgba(255,80,80,0.06); color:#ffb6b6;border:1px solid rgba(255,80,80,0.06)}
 
-  /* ---------- Futuristic footer ---------- */
-  footer{margin-top:28px;color:var(--muted);font-size:13px;text-align:center}
-  .hz{height:1px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));margin:18px 0}
-
-  /* ---------- tiny responsive tweaks ---------- */
-  @media(max-width:560px){
-    .hero{flex-direction:column;align-items:flex-start;gap:12px}
-    .btn{width:100%;justify-content:center}
+  label{font-size:13px;color:var(--muted);margin-bottom:6px;display:block}
+  input,select,textarea{
+    width:100%;padding:12px;border-radius:10px;
+    border:1px solid rgba(255,255,255,0.1);
+    background:rgba(255,255,255,0.02);
+    color:#e7f6fc;font-size:14px;
   }
+  input:focus,select:focus,textarea:focus{
+    border-color:#6ee7f3;outline:none;
+    box-shadow:0 0 10px rgba(110,231,243,0.2);
+  }
+
+  .row{display:flex;gap:12px;margin-bottom:15px}
+  .col{flex:1}
+
+  .msg{display:none;padding:10px;border-radius:10px;margin-bottom:12px;font-size:14px}
+  .success{background:rgba(0,255,200,0.08);border:1px solid rgba(0,255,200,0.15);color:#b7fff0}
+  .error{background:rgba(255,80,80,0.08);border:1px solid rgba(255,80,80,0.15);color:#ffbaba}
+
+  footer{text-align:center;margin-top:25px;color:var(--muted);font-size:13px;margin-bottom:15px}
 </style>
 </head>
 <body>
@@ -127,240 +107,181 @@
   <div class="logo">VG</div>
   <div class="brand">
     <h1>Vijay Generator</h1>
-    <p>Futuristic booking portal — professional genset solutions</p>
+    <p>Futuristic Generator Booking Portal</p>
   </div>
 </header>
 
 <div class="wrap">
-  <!-- LEFT: main form -->
-  <div>
-    <div class="hero card">
-      <div class="hero-left">
-        <h2>Instant Genset Booking</h2>
-        <p>Choose model, date & time, add location — we’ll confirm quickly.</p>
+
+  <!-- LEFT FORM -->
+  <div class="card">
+
+    <h2 style="margin-bottom:15px;">Book a Generator</h2>
+
+    <div id="successMsg" class="msg success"></div>
+    <div id="errorMsg" class="msg error"></div>
+
+    <form id="bookingForm">
+
+      <div class="row">
+        <div class="col">
+          <label>Genset Model</label>
+          <select id="model" required>
+            <option value="">Select Model</option>
+            <option>5 kW</option>
+            <option>7.5 kW</option>
+            <option>20 kW</option>
+            <option>30 kW</option>
+            <option>40 kW</option>
+          </select>
+        </div>
+
+        <div style="width:150px">
+          <label>Date</label>
+          <input type="date" id="date" required />
+        </div>
+
+        <div style="width:120px">
+          <label>Time</label>
+          <input type="time" id="time" required />
+        </div>
       </div>
-      <div>
-        <button class="btn" id="adminBtn" title="Admin (secure)">⚡ ADMIN</button>
+
+      <div class="row">
+        <div class="col">
+          <label>Full Name</label>
+          <input type="text" id="name" placeholder="Your name" required>
+        </div>
+
+        <div style="width:200px;">
+          <label>Phone</label>
+          <input type="text" id="phone" placeholder="9876543210" required>
+        </div>
       </div>
-    </div>
 
-    <div class="card" style="margin-bottom:18px">
-      <div class="accent-line"></div>
-
-      <div id="successMsg" class="msg success"></div>
-      <div id="errorMsg" class="msg error"></div>
-
-      <form id="bookingForm" autocomplete="off">
-        <div class="row">
-          <div class="col">
-            <label class="label">Genset Model</label>
-            <select id="model" class="input" required>
-              <option value="">-- select model --</option>
-              <option>5 kW</option>
-              <option>7.5 kW</option>
-              <option>20 kW</option>
-              <option>30 kW</option>
-              <option>40 kW</option>
-            </select>
-          </div>
-          <div style="width:150px">
-            <label class="label">Date</label>
-            <input id="date" type="date" class="input" required />
-          </div>
-          <div style="width:130px">
-            <label class="label">Time</label>
-            <input id="time" type="time" class="input" required />
-          </div>
+      <div class="row">
+        <div class="col">
+          <label>Email (optional)</label>
+          <input type="email" id="email" placeholder="email@example.com">
         </div>
 
-        <div class="row">
-          <div class="col">
-            <label class="label">Full Name</label>
-            <input id="name" class="input" type="text" placeholder="Your full name" required />
-          </div>
-          <div style="width:200px">
-            <label class="label">Phone</label>
-            <input id="phone" class="input" type="tel" placeholder="9876543210" required />
-          </div>
+        <div class="col">
+          <label>Location</label>
+          <input id="location" placeholder="City / Site Address" required>
+        </div>
+      </div>
+
+      <div class="row">
+        <div style="width:120px;">
+          <label>Quantity</label>
+          <select id="qty">
+            <option>1</option><option>2</option><option>3</option><option>4</option>
+          </select>
         </div>
 
-        <div class="row">
-          <div class="col">
-            <label class="label">Email (optional)</label>
-            <input id="email" class="input" type="email" placeholder="you@example.com" />
-          </div>
-          <div class="col">
-            <label class="label">Location</label>
-            <input id="location" class="input" type="text" placeholder="City or site address" required />
-          </div>
+        <div class="col">
+          <label>Message (optional)</label>
+          <textarea id="msgInput" placeholder="Special requirements..."></textarea>
         </div>
+      </div>
 
-        <div class="row">
-          <div style="width:120px">
-            <label class="label">Quantity</label>
-            <select id="qty" class="input">
-              <option>1</option><option>2</option><option>3</option><option>4</option>
-            </select>
-          </div>
-          <div class="col">
-            <label class="label">Message (optional)</label>
-            <textarea id="msgInput" class="input" placeholder="Special requirements..."></textarea>
-          </div>
-        </div>
-
-        <div style="display:flex;gap:12px;align-items:center;margin-top:8px">
-          <button type="submit" class="btn" id="submitBtn">🚀 Book Now</button>
-          <button type="button" id="resetBtn" class="btn-ghost">Reset</button>
-        </div>
-      </form>
-    </div>
-
-    <div class="card small" style="padding:14px;">
-      <strong>Quick tips</strong>
-      <ul style="margin-top:8px;color:var(--muted);line-height:1.6">
-        <li>We confirm bookings via email / phone.</li>
-        <li>For urgent support call: <strong style="color:#fff">+91 98765 43210</strong></li>
-        <li>Use correct site address for delivery & setup.</li>
-      </ul>
-    </div>
+      <!-- 🔁 Button with loader -->
+      <button class="btn" id="submitBtn" style="margin-top:10px;">
+        <span id="btnText">🚀 Confirm Booking</span>
+        <span id="btnSpinner" class="spinner" style="display:none;"></span>
+      </button>
+    </form>
   </div>
 
-  <!-- RIGHT: side panel -->
-  <aside class="card">
-    <div style="display:flex;justify-content:space-between;align-items:center">
-      <div>
-        <div class="side-title">Why Vijay Generator</div>
-        <div class="small">Trusted power solutions — pro service & quick delivery.</div>
-      </div>
-      <div style="text-align:right;color:var(--muted);font-size:12px">v1.0</div>
-    </div>
-
-    <hr class="hz" />
-
-    <ul class="side-list" style="margin-top:8px;list-style:none;padding-left:0">
-      <li>• High efficiency gensets</li>
-      <li>• Low noise operation</li>
-      <li>• Installation & onsite support</li>
-      <li>• Spare parts & AMC available</li>
+  <!-- RIGHT PANEL -->
+  <div class="card">
+    <h3>Why Choose Us</h3>
+    <p style="color:var(--muted);margin:10px 0">Reliable & professional genset solutions.</p>
+    <ul style="line-height:1.7;color:var(--muted);font-size:14px;margin-left:15px;">
+      <li>High efficiency generators</li>
+      <li>Low-noise operation</li>
+      <li>Fast delivery & setup</li>
+      <li>On-site support</li>
+      <li>Trusted service</li>
     </ul>
 
-    <div style="height:14px"></div>
+    <button class="btn" style="margin-top:20px;" onclick="window.location.href='tel:+919838902457'">📞 Call Us</button>
+    <button class="btn-ghost" style="margin-top:12px;" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Vijay+Generator','_blank')">📍 Open in Maps</button>
+  </div>
 
-    <div style="display:flex;gap:10px;flex-wrap:wrap">
-      <button class="btn" id="callBtn" style="padding:10px 12px;background-image:linear-gradient(90deg,#00d4ff,#7c5cff);">📞 Call Us</button>
-      <button class="btn-ghost" id="mapsBtn">📍 Open Map</button>
-    </div>
-  </aside>
 </div>
 
 <footer>
-  © 2025 Vijay Generator — Futuristic Booking Portal
+© 2025 Vijay Generator — Futuristic Booking Portal
 </footer>
 
 <script>
-  // ---------- CONFIG ----------
-  const API_URL = "https://vijay-generator-server.onrender.com/book"; // your server
-  const ADMIN_PAGE = "https://vijay-generator-server.onrender.com/admin/bookings?key=yourSecret123"; // admin endpoint (if enabled)
+const API_URL = "https://vijay-generator-server.onrender.com/book";
 
-  // ---------- UI elements ----------
-  const form = document.getElementById('bookingForm');
-  const successMsg = document.getElementById('successMsg');
-  const errorMsg = document.getElementById('errorMsg');
-  const submitBtn = document.getElementById('submitBtn');
-  const resetBtn = document.getElementById('resetBtn');
-  const adminBtn = document.getElementById('adminBtn');
-  const callBtn = document.getElementById('callBtn');
-  const mapsBtn = document.getElementById('mapsBtn');
+const form = document.getElementById("bookingForm");
+const successMsg = document.getElementById("successMsg");
+const errorMsg = document.getElementById("errorMsg");
 
-  function showSuccess(text){
-    successMsg.textContent = text;
-    successMsg.style.display = 'block';
-    errorMsg.style.display = 'none';
-    window.scrollTo({top:0,behavior:'smooth'});
+const submitBtn = document.getElementById("submitBtn");
+const btnText = document.getElementById("btnText");
+const btnSpinner = document.getElementById("btnSpinner");
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const data = {
+    model: model.value,
+    date: date.value,
+    time: time.value,
+    name: name.value.trim(),
+    phone: phone.value.trim(),
+    email: email.value.trim(),
+    location: location.value.trim(),
+    qty: qty.value,
+    message: msgInput.value.trim()
+  };
+
+  if (!data.model || !data.date || !data.time || !data.name || !data.phone || !data.location) {
+    errorMsg.textContent = "Please fill all required fields.";
+    errorMsg.style.display = "block";
+    successMsg.style.display = "none";
+    return;
   }
-  function showError(text){
-    errorMsg.textContent = text;
-    errorMsg.style.display = 'block';
-    successMsg.style.display = 'none';
-    window.scrollTo({top:0,behavior:'smooth'});
+
+  // 🔄 Show loading spinner
+  submitBtn.disabled = true;
+  btnText.textContent = "Processing...";
+  btnSpinner.style.display = "inline-block";
+
+  try {
+    const res = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    });
+
+    if (res.ok) {
+      successMsg.textContent = "Booking submitted successfully!";
+      successMsg.style.display = "block";
+      errorMsg.style.display = "none";
+      form.reset();
+    } else {
+      errorMsg.textContent = "Server error. Try again later.";
+      errorMsg.style.display = "block";
+      successMsg.style.display = "none";
+    }
+  } catch (err) {
+    errorMsg.textContent = "Network error. Check connection.";
+    errorMsg.style.display = "block";
+    successMsg.style.display = "none";
+  } finally {
+    // 🔁 Reset button state
+    submitBtn.disabled = false;
+    btnText.textContent = "🚀 Confirm Booking";
+    btnSpinner.style.display = "none";
   }
-
-  // ---------- form submit ----------
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    submitBtn.disabled = true;
-    submitBtn.style.opacity = 0.8;
-
-    const payload = {
-      model: document.getElementById('model').value,
-      date: document.getElementById('date').value,
-      time: document.getElementById('time').value,
-      name: document.getElementById('name').value.trim(),
-      phone: document.getElementById('phone').value.trim(),
-      email: document.getElementById('email').value.trim(),
-      location: document.getElementById('location').value.trim(),
-      qty: document.getElementById('qty').value,
-      message: document.getElementById('msgInput').value.trim()
-    };
-
-    // simple front validation
-    if(!payload.model || !payload.date || !payload.time || !payload.name || !payload.phone || !payload.location){
-      showError('Please fill all required fields.');
-      submitBtn.disabled = false;
-      submitBtn.style.opacity = 1;
-      return;
-    }
-
-    try {
-      const res = await fetch(API_URL, {
-        method: 'POST',
-        headers: {'Content-Type':'application/json'},
-        body: JSON.stringify(payload)
-      });
-
-      if(res.ok){
-        const data = await res.json().catch(()=>({}));
-        showSuccess('✅ Booking submitted. We will contact you shortly.');
-        form.reset();
-      } else {
-        const err = await res.json().catch(()=>({error:'Server error'}));
-        showError(err.error || 'Failed to submit booking. Try again later.');
-      }
-    } catch (err){
-      console.error('Submit error', err);
-      showError('Network error. Check your connection or try again later.');
-    } finally {
-      submitBtn.disabled = false;
-      submitBtn.style.opacity = 1;
-    }
-  });
-
-  // ---------- reset ----------
-  resetBtn.addEventListener('click', () => {
-    form.reset();
-    successMsg.style.display = 'none';
-    errorMsg.style.display = 'none';
-  });
-
-  // ---------- admin button ----------
-  adminBtn.addEventListener('click', () => {
-    const pass = prompt('Enter admin key:');
-    if(!pass) return;
-    // open admin bookings with key (the admin endpoint must be set to read key param)
-    const url = ADMIN_PAGE.replace('yourSecret123', encodeURIComponent(pass));
-    window.open(url, '_blank');
-  });
-
-  // ---------- quick actions ----------
-  callBtn.addEventListener('click', () => { window.location.href = 'tel:+919876543210'; });
-  mapsBtn.addEventListener('click', () => { window.open('https://www.google.com/maps/search/?api=1&query=Vijay+Generator', '_blank') });
-
-  // small animated glow on logo (cosmetic)
-  const logo = document.querySelector('.logo');
-  setInterval(() => {
-    logo.style.transform = 'translateY(-3px) scale(1.02)';
-    setTimeout(()=>logo.style.transform = 'translateY(0) scale(1)', 400);
-  }, 2800);
+});
 </script>
+
 </body>
 </html>
